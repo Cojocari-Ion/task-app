@@ -1,16 +1,34 @@
 import styled from '@emotion/styled';
-import Navbar from './components/Navbar';
 import { jsx, css } from '@emotion/react'
+import Navbar from './components/Navbar';
+import { useEffect, useState } from 'react';
 import { fontWhite, fs1, shadow, smallShadow, textShadow } from './CssVariables';
+import { db } from './firestore';
+import NamesList from './components/NameList';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import EmptyElement from './components/EmptyElement';
+import Input from './components/Input';
+import {dataNames} from './data'
+import InputContainer from './components/InputContainer';
 
 
 function App() {
 
   const Main = styled.div`
     background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
-    width: 100%;
+    max-width: 100vw;
     min-height: 800px;
     font-family: 'Poppins', sans-serif;
+    overflow-y: none;
   `
   const H1 = styled.h1`
     ${fontWhite}
@@ -20,32 +38,70 @@ function App() {
     ${fs1}
     ${textShadow}
   `
-  const InputContainer = styled.div`
-    background: #fff;
-    width: 330px;
+
+  const ClearButton = styled.button`
     height: 50px;
-    margin: 0 auto;
-    border-radius: 100px;
+    ${fontWhite}
+    font-size: 27px;
+    padding: 0 20px;
+    font-weight: 700;
+    border-radius: 50px;
+    background: #ff0000;
+    border: none;
     ${smallShadow}
+    margin-left: 20px;
+    cursor: pointer;
   `
+
+  const InputAndButtons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  `
+
+  const Form = styled.form`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  `
+
+  const linkStyle = {
+    color: '#fff',
+    textDecoration: 'none'
+  }
+
   
 
+
+
   return (
-    <Main>
+    <Main className='App'>
       <Navbar />
       
       <H1>
         search name
       </H1>
 
-      <InputContainer>
-        <input 
-          type="text" 
-          css={{
-            background: '#000'
-          }}
-        />
-      </InputContainer>
+      <InputAndButtons>
+
+        <InputContainer />
+
+        <ClearButton>
+          <Link style={linkStyle} to='/'>
+            clear
+          </Link>
+
+        </ClearButton>
+      
+      </InputAndButtons>
+
+
+
+      <Routes>
+        <Route path="/" element={<EmptyElement />} />
+        <Route path="list" element={<NamesList />} />
+      </Routes>
 
    </Main>
   );

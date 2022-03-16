@@ -1,0 +1,10 @@
+div input {
+  border: none;
+  height: 35px;
+  width: 80%;
+  font-size: 20px;
+}
+
+div input:focus {
+  outline: none;
+}
