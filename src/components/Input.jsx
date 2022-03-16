@@ -9,7 +9,7 @@ import { query } from 'firebase/firestore';
 const Input = () => {
 
   const dispatch = useDispatch();
-  const [searchedName, setSearchedName] = useState()
+  const [searchedName, setSearchedName] = useState('')
   const queryName = useSelector(state => state.query)
 
   const setName = (e) => {
@@ -26,7 +26,7 @@ const Input = () => {
 
   return (
     <div>
-        <input style={style} type="text" onChange={setName}/>
+        <input style={style} type="text" onChange={ setName}/>
     </div>
   )
 }

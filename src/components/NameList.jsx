@@ -49,6 +49,7 @@ const NamesList = () => {
   const queryName = useSelector(state => state.query);
   const query = queryName.searchQuery.searchQuery;
 
+  
   //useEffect(() => {
   //  const getUsers = async () => {
   //    const data = await getDocs(nameCollection);

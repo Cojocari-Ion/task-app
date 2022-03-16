@@ -18,7 +18,6 @@ import {
 import EmptyElement from './components/EmptyElement';
 import Input from './components/Input';
 import {dataNames} from './data'
-import InputContainer from './components/InputContainer';
 
 
 function App() {
@@ -59,22 +58,54 @@ function App() {
     justify-content: center;
   `
 
+  const linkStyle = {
+    color: '#fff',
+    textDecoration: 'none'
+  }
+
+  const InputContainer = styled.div`
+    background: #fff;
+    width: 330px;
+    height: 50px;
+    
+    padding-left: 20px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    ${smallShadow}
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+  `
+
+  const IconContainer = styled.button`
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #040C51;
+    border: none;
+    cursor: pointer;
+    
+  `
   const Form = styled.form`
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
   `
-
-  const linkStyle = {
-    color: '#fff',
-    textDecoration: 'none'
-  }
-
+  const Icon = styled.i` 
+    font-size: 30px;
+    color: #fff;
+  `
   
+  const query = useSelector(store => store.query);
 
-
-
+  useEffect(() => {
+    console.log(query)
+  }, [])
+  
   return (
     <Main className='App'>
       <Navbar />
@@ -85,7 +116,19 @@ function App() {
 
       <InputAndButtons>
 
-        <InputContainer />
+      <InputContainer>
+          
+          <Form onSubmit={e => e.preventDefault()} >
+              <Input/>
+              <IconContainer type='sumbit'>
+                  <Link to='list'> 
+                  <Icon className='fa-solid fa-magnifying-glass'></Icon>
+                  </Link>
+              </IconContainer >
+  
+          </Form>
+      
+      </InputContainer>
 
         <ClearButton>
           <Link style={linkStyle} to='/'>
