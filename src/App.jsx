@@ -99,11 +99,10 @@ function App() {
     font-size: 30px;
     color: #fff;
   `
-  
-  const query = useSelector(store => store.query);
+
 
   useEffect(() => {
-    console.log(query)
+
   }, [])
   
   return (
