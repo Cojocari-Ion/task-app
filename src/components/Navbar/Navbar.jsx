@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { shadow } from '../CssVariables';
+import { shadow } from '../../CssVariables';
 
 const Navbar = () => {
 
@@ -22,6 +22,8 @@ const Navbar = () => {
         color: #040C51;
         text-transform: uppercase;
     `
+
+
 
   return (
     <Nav>

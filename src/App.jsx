@@ -1,23 +1,9 @@
-import styled from '@emotion/styled';
-import { jsx, css } from '@emotion/react'
-import Navbar from './components/Navbar';
-import { useEffect, useState } from 'react';
+import Navbar from './components/Navbar/Navbar';
 import { fontWhite, fs1, shadow, smallShadow, textShadow } from './CssVariables';
-import { db } from './firestore';
-import NamesList from './components/NameList';
+import styled from '@emotion/styled';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
-import EmptyElement from './components/EmptyElement';
-import Input from './components/Input';
-import {dataNames} from './data'
+import FormAndGrid  from './components/Form + NameGrid/FormAndGrid';
+import react, { useState, useEffect } from 'react'
 
 
 function App() {
@@ -38,112 +24,20 @@ function App() {
     ${textShadow}
   `
 
-  const ClearButton = styled.button`
-    height: 50px;
-    ${fontWhite}
-    font-size: 27px;
-    padding: 0 20px;
-    font-weight: 700;
-    border-radius: 50px;
-    background: #ff0000;
-    border: none;
-    ${smallShadow}
-    margin-left: 20px;
-    cursor: pointer;
-  `
 
-  const InputAndButtons = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  `
 
-  const linkStyle = {
-    color: '#fff',
-    textDecoration: 'none'
-  }
-
-  const InputContainer = styled.div`
-    background: #fff;
-    width: 330px;
-    height: 50px;
-    
-    padding-left: 20px;
-    box-sizing: border-box;
-    border-radius: 100px;
-    ${smallShadow}
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-  `
-
-  const IconContainer = styled.button`
-    width: 30%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #040C51;
-    border: none;
-    cursor: pointer;
-    
-  `
-  const Form = styled.form`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  `
-  const Icon = styled.i` 
-    font-size: 30px;
-    color: #fff;
-  `
-
-  
-  const navigate = useNavigate();
-  
   return (
     <Main className='App'>
+      
       <Navbar />
       
       <H1>
         search name
       </H1>
 
-      <InputAndButtons>
+      <FormAndGrid />
 
-      <InputContainer>
-          
-          <Form onSubmit={(e) => {e.preventDefault(); navigate('/list')}} >
-              <Input/>
-              <IconContainer type='sumbit'>
-                  <Link to='/list'> 
-                  <Icon className='fa-solid fa-magnifying-glass'></Icon>
-                  </Link>
-              </IconContainer >
-  
-          </Form>
-      
-      </InputContainer>
-
-        <ClearButton>
-          <Link style={linkStyle} to='/'>
-            clear
-          </Link>
-
-        </ClearButton>
-      
-      </InputAndButtons>
-
-
-
-      <Routes>
-        <Route path="/" element={<EmptyElement />} />
-        <Route path="/list" element={<NamesList />} />
-      </Routes>
-
-   </Main>
+    </Main>
   );
 }
 

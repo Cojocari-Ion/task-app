@@ -6,6 +6,14 @@ export const fontWhite = css`
     color: #fff;
     text-transform: uppercase;
 `
+
+export const primaryTextColor = css`
+    color: #040C51;
+`
+export const primaryBackgroundColor = css`
+    background: #040C51;
+`
+
 // font sizes
 export const fs1 = css`
     font-size: 62px;
