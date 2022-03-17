@@ -43,27 +43,8 @@ const NamesList = () => {
     
   `
 
-  const [nameList, setNameList] = useState([]);
-  const nameCollection = collection(db, "names");
-
   const queryName = useSelector(state => state.query);
   const query = queryName.searchQuery.searchQuery;
-
-  
-  //useEffect(() => {
-  //  const getUsers = async () => {
-  //    const data = await getDocs(nameCollection);
-  //    const names = data.docs[3]._document.data.value.mapValue.fields.name.stringValue
-  //    setNameList(data.docs);
-  //    
-  //  };
-  //
-  //  getUsers();
-  //}, []);
-
-  //item._document.data.value.mapValue.fields.name.stringValue
-
-  const test = 'a';
   
 
   return (

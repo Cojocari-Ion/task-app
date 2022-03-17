@@ -11,7 +11,7 @@ const Input = () => {
 
   const dispatch = useDispatch();
   const [searchedName, setSearchedName] = useState('')
-  const queryName = useSelector(state => state.query)
+  
 
   //const setName = (e) => {
   //  dispatch(setQuery({
@@ -20,29 +20,30 @@ const Input = () => {
   //  setSearchedName(queryName.searchQuery.searchQuery);
   //  
   //}
-
+  
   const setName = (e) => {
-    setSearchedName(e.target.value)
-    dispatch(setQuery({
-      searchQuery: searchedName,
-    }));
+    setSearchedName(e.target.value);
   }
 
+  const queryName = useSelector(state => state.query);
+
+
   
-  const selectName = useSelector(store => store.query)
- 
   useEffect(() => {
-    
-    console.log(selectName)
-  }, [])
-  
+    dispatch(setQuery({
+        searchQuery: searchedName,
+       }));
+    console.log(searchedName)
+
+  }, [searchedName])
+
   const style = {
     textTransform: 'lowercase'
   }
 
   return (
     <div>
-        <input style={style} type="text" onChange={setName}/>
+        <input style={style} type="text" onChange={setName} />
     </div>
   )
 }
