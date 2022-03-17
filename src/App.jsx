@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { fontWhite, fs1, shadow, smallShadow, textShadow } from './CssVariables';
 import { db } from './firestore';
 import NamesList from './components/NameList';
+import { setQuery } from './store/slices/searchValueSlice';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -60,14 +61,24 @@ function App() {
 
   const linkStyle = {
     color: '#fff',
-    textDecoration: 'none'
+    textDecoration: 'none',
+  }
+
+  const inputStyle = {
+    border: 'none',
+    height: '35px',
+    width: '80%',
+    textTransform: 'lowercase',
+    fontSize: '20px',
+    ':focus': {
+      outline: 'none'
+    }
   }
 
   const InputContainer = styled.div`
     background: #fff;
     width: 330px;
     height: 50px;
-    
     padding-left: 20px;
     box-sizing: border-box;
     border-radius: 100px;
@@ -100,10 +111,14 @@ function App() {
     color: #fff;
   `
 
+  
+  const navigate = useNavigate();
+  const [typedName, setTypedName] = useState()
 
-  useEffect(() => {
-
-  }, [])
+  const setName = (e) => {
+    setTypedName(e.target.value)
+    console.log(typedName)
+  }
   
   return (
     <Main className='App'>
@@ -117,10 +132,12 @@ function App() {
 
       <InputContainer>
           
-          <Form onSubmit={e => e.preventDefault()} >
-              <Input/>
+          <Form onSubmit={(e) => {e.preventDefault(); navigate('/list')}} >
+              <div>
+                  <input style={inputStyle} type="text" onChange={setName}/>
+              </div>
               <IconContainer type='sumbit'>
-                  <Link to='list'> 
+                  <Link to='/list'> 
                   <Icon className='fa-solid fa-magnifying-glass'></Icon>
                   </Link>
               </IconContainer >
@@ -142,7 +159,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<EmptyElement />} />
-        <Route path="list" element={<NamesList />} />
+        <Route path="/list" element={<NamesList />} />
       </Routes>
 
    </Main>
